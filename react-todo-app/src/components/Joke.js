@@ -1,0 +1,11 @@
+function Joke(props) {
+    return(
+        <div>
+            <h3 style={{display: !props.question && "none"}}>Question: {props.question}</h3>
+            <h3 style={{color: !props.question && "#888"}}>Question: {props.punchLine}</h3>
+            <br />
+        </div>
+    )
+}
+
+export default Joke

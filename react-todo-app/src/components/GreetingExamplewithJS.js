@@ -1,5 +1,5 @@
 function GreetingExamplewithJS() {
-    const date = new Date(2021, 8, 20, 9);
+    const date = new Date;
     const hours = date.getHours();
     let timeOfDay;
     const styles = {
