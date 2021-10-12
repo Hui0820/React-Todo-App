@@ -4,6 +4,7 @@ import './App.css';
 import Greeting from "./components/Greeting"
 import TodoItem from './components/TodoItem';
 import LoginState from "./components/LoginState"
+import ClickCounting from "./components/ClickCounting"
 
 import todosData from "./data/todosData"
 
@@ -28,6 +29,7 @@ class App extends React.Component {
 
         <div>
           <LoginState />
+          <ClickCounting />
         </div>
       </div>
     )
