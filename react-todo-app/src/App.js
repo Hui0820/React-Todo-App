@@ -16,10 +16,10 @@ class App extends React.Component {
       todos: todosData
     }
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(id) {
+  handleChange(id){
     this.setState(prevState => {
       const updatedTodos = prevState.todos.map(todo => {
         if(todo.id === id) {
@@ -39,13 +39,13 @@ class App extends React.Component {
   }
 
   render () {
-    const todoComponents = this.state.todos.map(item => <TodoItem key={item.id} todoItem={item} handleChange={this.handleChange}/>)
+    const toDoComponent = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange} />)
 
     return (
       <div>
         <div className="todo-list">
           <Greeting />
-          {todoComponents}
+          {toDoComponent}
         </div>
 
         <div>
