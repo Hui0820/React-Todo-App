@@ -1,15 +1,18 @@
 import React from "react"
+import randomcolor from "randomcolor"
 
 class ClickCounting extends React.Component {
     constructor() {
-        super();
+        super()
         this.state = {
-            count: 0
+            count: 0,
+            color: ""
         }
-        this.clickHandle = this.clickHandle.bind(this);
+        this.increment = this.increment.bind(this)
+        this.decrement = this.decrement.bind(this)
     }
 
-    clickHandle() {
+    increment() {
         this.setState(prevState => {
             return {
                 count: prevState.count + 1
@@ -17,11 +20,27 @@ class ClickCounting extends React.Component {
         })
     }
 
+    decrement() {
+        this.setState(prevState => {
+            return {
+                count: prevState.count -1
+            }
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.count !== this.state.count) {
+            const newColor = randomcolor()
+            this.setState({color: newColor})
+        }
+    }
+
     render() {
         return (
             <div>
-                <h1>{this.state.count}</h1>
-                <button onClick={this.clickHandle}>Change!</button>
+                <h1 style={{color: this.state.color}}>{this.state.count}</h1>
+                <button onClick={this.increment}>Increment</button>
+                <button onClick={this.decrement}>Decrement</button>
             </div>
         )
     }
