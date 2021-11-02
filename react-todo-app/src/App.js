@@ -18,11 +18,18 @@ class App extends React.Component {
       unreadMessage: [
         "Call you mom!", "Can I come over tonight?", "Good morning!"
       ],
-      isLoggedIn: false
+      isLoggedIn: false,
+      character: {},
+      loadingAPIData: false,
+      firstName: "",
+      lastName: "",
+      textarea: "",
+      isChecked: false
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleFormChange = this.handleFormChange.bind(this)
   }
 
   handleChange(id){
@@ -52,12 +59,33 @@ class App extends React.Component {
     })
   }
 
+  handleFormChange(event) {
+    const {name, value, type, checked} = event.target
+
+    type === 'checkbox' ? this.setState({isChecked: checked}) : this.setState({[name]: value})
+  }
+
   componentDidMount() {
     setTimeout(() => {
       this.setState({
         isLoading: false
       })
     }, 1500)
+
+    this.setState({ loadingAPIData: true })
+
+    fetch("https://swapi.dev/api/people/1/")
+    .then(response => response.json())
+    .then(data => this.setState({
+      character: data,
+      loadingAPIData: false
+    }))
+
+    fetch("https://swapi.dev/api/people/1/")
+      .then(response => response.json())
+      .then(data => this.setState({
+        character: data
+      }))
   }
 
   render () {
@@ -79,6 +107,26 @@ class App extends React.Component {
           <ClickCounting />
           <Conditional isLoading={this.state.isLoading} />
           { this.state.unreadMessage.length > 0 && <h1>You have {this.state.unreadMessage.length} unread messages!</h1> }
+          <h1>Star War</h1>
+          <div>{this.state.loadingAPIData ? "Loading..." : this.state.character.name}</div>
+        </div>
+
+        <div>
+          <h1>Forms</h1>
+          <form>
+            <input type="text" name="firstName" value={this.state.firstName} placeholder="First Name" onChange={this.handleFormChange} />
+            <br />
+            <input type="text" name="lastName" value={this.state.lastName} placeholder="Last Name" onChange={this.handleFormChange} />
+            <br />
+            <textarea name="textarea" value={this.state.textarea} onChange={this.handleFormChange} />
+            <br />
+            <div>
+              <input type="checkbox" name="isChecked" checked={this.state.isChecked} onChange={this.handleFormChange} />
+              <label>Is friendly?</label>
+            </div>
+            
+            <h1>{this.state.textarea} {this.state.firstName} {this.state.lastName}</h1>
+          </form>
         </div>
       </div>
     )
