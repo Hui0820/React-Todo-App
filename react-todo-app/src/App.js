@@ -24,7 +24,9 @@ class App extends React.Component {
       firstName: "",
       lastName: "",
       textarea: "",
-      isChecked: false
+      isChecked: false,
+      gender: "",
+      favColor: "blue"
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -62,7 +64,7 @@ class App extends React.Component {
   handleFormChange(event) {
     const {name, value, type, checked} = event.target
 
-    type === 'checkbox' ? this.setState({isChecked: checked}) : this.setState({[name]: value})
+    type === 'checkbox' ? this.setState({[name]: checked}) : this.setState({[name]: value})
   }
 
   componentDidMount() {
@@ -100,7 +102,7 @@ class App extends React.Component {
 
         <div>
           <h1>Conditional rendering practice</h1>
-          <div>          
+          <div>
             <h3>Your are currently {this.state.isLoggedIn ? "logged in" : "logged out"}</h3>
             <button onClick={this.handleLogin}>{this.state.isLoggedIn ? "Log out" : "Log in"}</button>
           </div>
@@ -124,8 +126,31 @@ class App extends React.Component {
               <input type="checkbox" name="isChecked" checked={this.state.isChecked} onChange={this.handleFormChange} />
               <label>Is friendly?</label>
             </div>
-            
+            <br />
+            <div>
+              <input type="radio" name="gender" checked={this.state.gender === "male"} value="male" onChange={this.handleFormChange} />
+              <label>Male</label>
+            </div>
+            <div>
+              <input type="radio" name="gender" checked={this.state.gender === "female"} value="female" onChange={this.handleFormChange} />
+              <label>Female</label>
+            </div>
+
+            <label>My favourite color is: </label>
+            <select name="favColor" value={this.state.favColor} onChange={this.handleFormChange}>
+              <option value="blue">Blue</option>
+              <option value="green">Green</option>
+              <option value="red">Red</option>
+              <option value="yellow">Yellow</option>
+              <option value="orange">Orange</option>
+            </select>
+
             <h1>{this.state.textarea} {this.state.firstName} {this.state.lastName}</h1>
+            { this.state.gender !== "" && <h2>You are a {this.state.gender}</h2> }
+            <h2>My favourite color is {this.state.favColor}</h2>
+
+            <button>Submit</button>
+
           </form>
         </div>
       </div>
