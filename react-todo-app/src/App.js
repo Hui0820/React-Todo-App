@@ -5,6 +5,7 @@ import Greeting from "./components/Greeting"
 import TodoItem from './components/TodoItem';
 import ClickCounting from "./components/ClickCounting"
 import Conditional from "./components/Conditional"
+import TravelForm from "./components/TravelForm"
 
 import todosData from "./data/todosData"
 
@@ -98,6 +99,10 @@ class App extends React.Component {
         <div className="todo-list">
           <Greeting />
           {toDoComponent}
+        </div>
+        <br />
+        <div className="travel-form">
+           <TravelForm />
         </div>
 
         <div>
