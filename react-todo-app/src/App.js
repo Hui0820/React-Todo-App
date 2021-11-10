@@ -8,6 +8,8 @@ import Conditional from "./components/Conditional"
 
 import todosData from "./data/todosData"
 import TravelFormContainer from "./components/TravelFormContainer";
+import Header from "./components/Header"
+import MemeGenerator from "./components/MemeGenerator"
 
 class App extends React.Component {
   constructor() {
@@ -83,14 +85,25 @@ class App extends React.Component {
 
     return (
       <div>
+        <div className="meme-generator">
+          <Header />
+          <MemeGenerator />
+        </div>
+
+        <br />
+        
         <div className="todo-list">
           <Greeting />
           {toDoComponent}
         </div>
+
         <br />
+
         <div className="travel-form">
-           <TravelFormContainer />
+          <TravelFormContainer />
         </div>
+
+        <br />
 
         <div>
           <h1>Conditional rendering practice</h1>
